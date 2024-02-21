@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+
+<!-- Include jQuery UI -->
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fixify - Registration</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #515151;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #000000;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            box-sizing: border-box;
+            display: sticky;
+            align-items: baseline;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .header p {
+            color: #FFFFFF;
+            font-weight: bold;
+            text-align: left;
+            margin: 0;
+        }
+
+        .header a {
+            color: #fff;
+            text-decoration: none;
+            margin: 0 15px;
+            font-weight: bold;
+        }
+
+        .registration-container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            text-align: left;
+        }
+
+        .registration-container h2 {
+            color: #333;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 8px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .register-button {
+            background-color: #EAC25C;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .register-button:hover {
+            background-color: #EAC25C;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <p>FIXIFY</p>
+        <a href="#">Home</a>
+        <a href="./login.html">Login</a>
+        <a href="#">Contact</a>
+    </div>
+
+    <div class="registration-container">
+        <h2>Registration</h2>
+<form action="your_server_side_registration_handler.php" method="post">
+    <div class="form-group">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" required>
+    </div>
+    <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+    </div>
+    <div class="form-group">
+        <label for="password">Parolă:</label>
+        <input type="password" id="password" name="password" required>
+    </div>
+    <div class="form-group">
+        <label for="location">Locație:</label>
+        <input type="text" id="location" name="location" list="cities" required>
+    </div>
+    <div class="form-group">
+        <label for="name">Prenume:</label>
+        <input type="text" id="name" name="name" required>
+    </div>
+    <div class="form-group">
+        <label for="surname">Nume:</label>
+        <input type="text" id="surname" name="surname" required>
+    </div>
+    <div class="form-group">
+        <label for="dob">Data nașterii:</label>
+        <input type="date" id="dob" name="dob" required>
+    </div>
+
+    <div class="form-group">
+            <label for="role">Rol:</label>
+            <select id="role" name="role">
+                <option value="Fixer">Fixer</option>
+                <option value="Client">Client</option>
+            </select>
+        </div>
+
+        <!-- Hidden section for Fixer options -->
+        <div class="form-group" id="fixerOptions" style="display: none;">
+            <label for="fixerJob">Fixer Job:</label>
+            <select id="fixerJob" name="fixerJob">
+                <option value="Plumbing">Cleaner</option>
+                <option value="Electrical">Electrical</option>
+                <option value="Carpentry">Carpentry</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+
+        <button type="submit" class="register-button">Register</button>
+
+    <script>
+        // Enable Autocomplete on the location input field
+        $(function() {
+            var availableLocations = [
+                "Chișinău", "Tiraspol", "Bălți", "Bender", "Rîbnița", "Cahul", "Ungheni", "Soroca", "Orhei", "Dubăsari", "Comrat", "Edineț", "Ceadîr-Lunga", "Căușeni", "Strășeni", "Drochia", "Rezina", "Taraclia", "Florești", "Hîncești", "Fălești", "Vulcănești", "Ialoveni", "Sîngerei", "Ștefan Vodă", "Anenii Noi", "Călărași", "Nisporeni", "Criuleni", "Telenești", "Ocnița", "Cantemir", "Leova", "Șoldănești", "Șipoteni", "Basarabeasca", "Camenca", "Glodeni", "Dondușeni", "Sîngera", "Șoldănești"
+            ];
+
+            $("#location").autocomplete({
+                source: availableLocations
+            });
+        });
+
+        $(document).ready(function() {
+            $('#role').on('change', function() {
+                showJobOptions();
+            });
+        });
+
+        function showJobOptions() {
+            var roleDropdown = $("#role");
+            var fixerOptions = $("#fixerOptions");
+
+            if (roleDropdown.val() === "Fixer") {
+                fixerOptions.show();
+            } else {
+                fixerOptions.hide();
+            }
+        }
+    </script>
+</div>
+</body>
+</html>
