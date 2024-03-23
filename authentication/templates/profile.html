@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Profile</title>
+</head>
+<body>
+    <header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+          <div class="header-logo">
+            <h1>
+              <span class="white-text">FIXI</span><span class="yellow-text">FY.</span>
+            </h1>
+          </div>
+          <nav class="header-navigation">
+            {% if user.is_authenticated %}
+              <a href="{% url 'profile' %}">Profile</a>
+              <a href="{% url 'blog_list' %}">Blog</a>
+              <div class="dropdown">
+                <button class="dropbtn">Menu</button>
+                <div class="dropdown-content">
+                  <a href="#">Settings</a>
+                  <a href="{% url 'logout' %}">Logout</a>
+                </div>
+              </div>
+            {% else %}
+              <a href="{% url 'register' %}">Înregistrează-te</a>
+              <a href="{% url 'login' %}">Login</a>
+              <a href="{% url 'blog_list' %}">Blog</a>
+            {% endif %}
+          </nav>
+        </div>
+      </header>
+      
+
+    <main>
+        <section>
+            <h1>User Profile</h1>
+            <div>
+                <p><strong>Name:</strong> {{ user.first_name }} {{ user.last_name }}</p>
+                <p><strong>Username:</strong> {{ user.username }}</p>
+                <p><strong>Email:</strong> {{ user.email }}</p>
+                <p><strong>Role:</strong> {{ user.get_role_display }}</p>
+                {% if user.worker_type %}
+                <p><strong>Worker Type:</strong> {{ user.worker_type }}</p>
+                {% endif %}
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <!-- Footer content here -->
+    </footer>
+</body>
+</html>

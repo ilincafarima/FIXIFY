@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+</head>
+<body>
+
+    <header class="header-outer">
+        <div class="header-inner responsive-wrapper">
+          <div class="header-logo">
+            <h1>
+              <span class="white-text">FIXI</span><span class="yellow-text">FY.</span>
+            </h1>
+          </div>
+          <nav class="header-navigation">
+            <a href="{% url 'register' %}">Înregistrează-te</a>
+            <a href="{% url 'login' %}">Login</a>
+            <a href="{% url 'blog_list' %}">Blog</a>
+            <button>Menu</button>
+          </nav>
+        </div>
+      </header>
+
+<main>
+    <section class="search-results">
+        <h2>Search Results for "{{ query }}"</h2>
+        <ul>
+            {% for result in results %}
+                <li>{{ result.title }}</li>
+            {% empty %}
+                <li>No results found.</li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+
+
+
+</body>
+</html>

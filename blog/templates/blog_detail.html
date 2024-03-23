@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ blog_post.title }}</title>
+</head>
+<body>
+   <!-- Display blog post content -->
+<h1>{{ blog_post.title }}</h1>
+<p>{{ blog_post.body }}</p>
+
+<!-- Display existing comments -->
+{% for comment in comments %}
+    <div class="comment">
+        <p>{{ comment.body }}</p>
+        <p>Posted by: {{ comment.author.username }}</p>
+        <p>Posted on: {{ comment.timestamp }}</p>
+    </div>
+{% empty %}
+    <p>No comments yet.</p>
+{% endfor %}
+
+<!-- Comment form for authenticated users -->
+{% if user.is_authenticated %}
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Post Comment</button>
+    </form>
+{% else %}
+    <p>Please <a href="{% url 'login' %}">login</a> to leave a comment.</p>
+{% endif %}
+</body>
+</html>
